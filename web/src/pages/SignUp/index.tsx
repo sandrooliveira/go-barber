@@ -1,8 +1,8 @@
-import React from 'react';
-import {
-  FiArrowLeft, FiMail, FiLock, FiUser,
-} from 'react-icons/fi';
+import React, { useCallback, useRef } from 'react';
+import { FiArrowLeft, FiMail, FiLock, FiUser } from 'react-icons/fi';
 import { Form } from '@unform/web';
+import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -10,10 +10,30 @@ import { Container, Content, Background } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
+import getErrorInfo from '../../utils/getErrorInfo';
+
 const SignUp: React.FC = () => {
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
+  const formRef = useRef<FormHandles>(null);
+
+  const onSubmit = useCallback(async (data: object) => {
+    try {
+      formRef.current?.setErrors({});
+      const schema = Yup.object().shape({
+        user: Yup.string().required('Please inform your user'),
+        email: Yup.string()
+          .required('Please inform your email')
+          .email('Not valid email'),
+        password: Yup.string().min(6, 'Min of 6 digits'),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+    } catch (err) {
+      const errors = getErrorInfo(err);
+      formRef.current?.setErrors(errors);
+    }
+  }, []);
 
   return (
     <Container>
@@ -22,12 +42,21 @@ const SignUp: React.FC = () => {
       <Content>
         <img src={logoImg} alt="logo" />
 
-        <Form initialData={{ user: 'sandro.oliveira', email: 'sandro@gmail.com' }} onSubmit={onSubmit}>
+        <Form
+          ref={formRef}
+          initialData={{ user: 'sandro.oliveira', email: 'sandro@gmail.com' }}
+          onSubmit={onSubmit}
+        >
           <h1>Register yourself</h1>
 
           <Input icon={FiUser} name="user" placeholder="User" />
           <Input icon={FiMail} name="email" placeholder="E-mail" />
-          <Input icon={FiLock} name="password" type="password" placeholder="Password" />
+          <Input
+            icon={FiLock}
+            name="password"
+            type="password"
+            placeholder="Password"
+          />
           <Button type="submit">Register</Button>
         </Form>
 
