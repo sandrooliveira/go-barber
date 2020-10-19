@@ -29,20 +29,20 @@ export const Content = styled.div`
     }
 
     a {
-      color: #F4EDE8;
+      color: #f4ede8;
       display: block;
       margin-top: 24px;
       text-decoration: none;
       transition: color 0.2s;
 
-      &:hover{
-        color: ${shade(0.2, '#F4EDE8')}
+      &:hover {
+        color: ${shade(0.2, '#F4EDE8')};
       }
     }
   }
 
   > a {
-    color: #FF9000;
+    color: #ff9000;
     display: block;
     margin-top: 24px;
     text-decoration: none;
@@ -51,15 +51,14 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
 
-    &:hover{
-        color: ${shade(0.2, '#FF9000')}
-      }
+    &:hover {
+      color: ${shade(0.2, '#FF9000')};
+    }
 
     svg {
       margin-right: 16px;
     }
   }
-
 `;
 
 export const Background = styled.div`

@@ -19,9 +19,9 @@ const SignUp: React.FC = () => {
     try {
       formRef.current?.setErrors({});
       const schema = Yup.object().shape({
-        user: Yup.string().required('Please inform your user'),
+        user: Yup.string().required('User is mandatory'),
         email: Yup.string()
-          .required('Please inform your email')
+          .required('E-mail is mandatory')
           .email('Not valid email'),
         password: Yup.string().min(6, 'Min of 6 digits'),
       });
@@ -42,11 +42,7 @@ const SignUp: React.FC = () => {
       <Content>
         <img src={logoImg} alt="logo" />
 
-        <Form
-          ref={formRef}
-          initialData={{ user: 'sandro.oliveira', email: 'sandro@gmail.com' }}
-          onSubmit={onSubmit}
-        >
+        <Form ref={formRef} onSubmit={onSubmit}>
           <h1>Register yourself</h1>
 
           <Input icon={FiUser} name="user" placeholder="User" />
