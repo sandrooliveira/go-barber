@@ -19,28 +19,31 @@ interface SignInFormData {
 }
 
 const SignIn: React.FC = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, user } = useContext(AuthContext);
 
   const formRef = useRef<FormHandles>(null);
 
-  const onSubmit = useCallback(async (data: SignInFormData) => {
-    try {
-      formRef.current?.setErrors({});
-      const schema = Yup.object().shape({
-        email: Yup.string().required('E-mail is mandatory'),
-        password: Yup.string().required('Password is mandatory'),
-      });
+  const onSubmit = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        formRef.current?.setErrors({});
+        const schema = Yup.object().shape({
+          email: Yup.string().required('E-mail is mandatory'),
+          password: Yup.string().required('Password is mandatory'),
+        });
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      signIn({ email: data.email, password: data.password });
-    } catch (err) {
-      const errors = getErrorInfo(err);
-      formRef.current?.setErrors(errors);
-    }
-  }, []);
+        signIn({ email: data.email, password: data.password });
+      } catch (err) {
+        const errors = getErrorInfo(err);
+        formRef.current?.setErrors(errors);
+      }
+    },
+    [signIn],
+  );
 
   return (
     <Container>
