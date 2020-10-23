@@ -1,4 +1,5 @@
 import React, { createContext } from 'react';
+import Api from '../services/api';
 
 interface SignInCredentials {
   email: string;
@@ -7,7 +8,7 @@ interface SignInCredentials {
 
 interface AuthContextData {
   name: string;
-  signIn(credentials: SignInCredentials): void;
+  signIn(credentials: SignInCredentials): Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextData>(
@@ -15,8 +16,13 @@ export const AuthContext = createContext<AuthContextData>(
 );
 
 export const AuthenticationProvider: React.FC = ({ children }) => {
-  const signIn = ({ email, password }: SignInCredentials) => {
-    console.log(email, password);
+  const signIn = async ({ email, password }: SignInCredentials) => {
+    const response = await Api.post('sessions', {
+      email,
+      password,
+    });
+
+    console.log(response);
   };
 
   return (
