@@ -4,7 +4,7 @@ import SignIn from './pages/SignIn';
 // import SignUp from './pages/SignUp';
 import GlobalStyle from './styles/global';
 
-import { AuthenticationProvider } from './context/AuthContext';
+import { AuthenticationProvider } from './hooks/AuthContext';
 
 const App: React.FC = () => (
   <>
