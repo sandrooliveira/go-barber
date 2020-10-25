@@ -11,7 +11,8 @@ import { Container, Content, Background } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
 interface SignInFormData {
   email: string;
@@ -20,6 +21,7 @@ interface SignInFormData {
 
 const SignIn: React.FC = () => {
   const { signIn } = useAuth();
+  const { showToast } = useToast();
 
   const formRef = useRef<FormHandles>(null);
 
@@ -36,13 +38,14 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
 
-        signIn({ email: data.email, password: data.password });
+        await signIn({ email: data.email, password: data.password });
       } catch (err) {
         const errors = getErrorInfo(err);
         formRef.current?.setErrors(errors);
+        showToast();
       }
     },
-    [signIn],
+    [signIn, showToast],
   );
 
   return (
