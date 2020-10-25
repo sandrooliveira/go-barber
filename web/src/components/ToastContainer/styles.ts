@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 interface ToastProps {
   type?: 'success' | 'error' | 'info';
+  hasDescription: boolean;
 }
 
 const toastVariations = {
@@ -66,4 +67,14 @@ export const Toast = styled.div<ToastProps>`
     background: transparent;
     color: inherit;
   }
+
+  ${props =>
+    !props.hasDescription &&
+    css`
+      align-items: center;
+
+      svg {
+        margin-top: 0;
+      }
+    `}
 `;

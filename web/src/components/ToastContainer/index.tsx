@@ -5,7 +5,7 @@ import { Container, Toast } from './styles';
 
 const ToastContainer: React.FC = () => (
   <Container>
-    <Toast type="error">
+    <Toast hasDescription type="error">
       <FiAlertCircle size={20} />
 
       <div>
@@ -18,12 +18,11 @@ const ToastContainer: React.FC = () => (
       </button>
     </Toast>
 
-    <Toast type="success">
+    <Toast hasDescription={false} type="success">
       <FiAlertCircle size={20} />
 
       <div>
-        <strong>An error has occured</strong>
-        <p>It was not possible to login on the application</p>
+        <strong>Success</strong>
       </div>
 
       <button type="button">
@@ -31,12 +30,12 @@ const ToastContainer: React.FC = () => (
       </button>
     </Toast>
 
-    <Toast>
+    <Toast hasDescription>
       <FiAlertCircle size={20} />
 
       <div>
-        <strong>An error has occured</strong>
-        <p>It was not possible to login on the application</p>
+        <strong>Info</strong>
+        <p>Here is your info</p>
       </div>
 
       <button type="button">
