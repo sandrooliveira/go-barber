@@ -21,7 +21,7 @@ interface SignInFormData {
 
 const SignIn: React.FC = () => {
   const { signIn } = useAuth();
-  const { showToast } = useToast();
+  const { addToast } = useToast();
 
   const formRef = useRef<FormHandles>(null);
 
@@ -42,10 +42,14 @@ const SignIn: React.FC = () => {
       } catch (err) {
         const errors = getErrorInfo(err);
         formRef.current?.setErrors(errors);
-        showToast();
+        addToast({
+          type: 'info',
+          title: 'Chique',
+          description: 'Agora ta chique',
+        });
       }
     },
-    [signIn, showToast],
+    [signIn, addToast],
   );
 
   return (
