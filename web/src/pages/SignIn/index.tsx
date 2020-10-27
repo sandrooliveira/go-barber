@@ -40,12 +40,17 @@ const SignIn: React.FC = () => {
 
         await signIn({ email: data.email, password: data.password });
       } catch (err) {
-        const errors = getErrorInfo(err);
-        formRef.current?.setErrors(errors);
+        if (err instanceof Yup.ValidationError) {
+          const errors = getErrorInfo(err);
+          formRef.current?.setErrors(errors);
+          return;
+        }
+
         addToast({
-          type: 'info',
-          title: 'Chique',
-          description: 'Agora ta chique',
+          type: 'error',
+          title: 'Not possible to connect to the API',
+          description:
+            'No data was retrieved, please contact system administrator',
         });
       }
     },
