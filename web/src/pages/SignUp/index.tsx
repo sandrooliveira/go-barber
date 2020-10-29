@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 
 import logoImg from '../../assets/logo.svg';
 
-import { Container, Content, Background } from './styles';
+import { Container, Content, Background, AnimatedContent } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
@@ -41,26 +41,28 @@ const SignUp: React.FC = () => {
       <Background />
 
       <Content>
-        <img src={logoImg} alt="logo" />
+        <AnimatedContent>
+          <img src={logoImg} alt="logo" />
 
-        <Form ref={formRef} onSubmit={onSubmit}>
-          <h1>Register yourself</h1>
+          <Form ref={formRef} onSubmit={onSubmit}>
+            <h1>Register yourself</h1>
 
-          <Input icon={FiUser} name="user" placeholder="User" />
-          <Input icon={FiMail} name="email" placeholder="E-mail" />
-          <Input
-            icon={FiLock}
-            name="password"
-            type="password"
-            placeholder="Password"
-          />
-          <Button type="submit">Register</Button>
-        </Form>
+            <Input icon={FiUser} name="user" placeholder="User" />
+            <Input icon={FiMail} name="email" placeholder="E-mail" />
+            <Input
+              icon={FiLock}
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+            <Button type="submit">Register</Button>
+          </Form>
 
-        <Link to="/">
-          <FiArrowLeft />
-          Back to logon page
-        </Link>
+          <Link to="/">
+            <FiArrowLeft />
+            Back to logon page
+          </Link>
+        </AnimatedContent>
       </Content>
     </Container>
   );

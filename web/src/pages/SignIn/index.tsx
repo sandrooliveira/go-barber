@@ -8,7 +8,7 @@ import { FormHandles } from '@unform/core';
 import logoImg from '../../assets/logo.svg';
 import getErrorInfo from '../../utils/getErrorInfo';
 
-import { Container, Content, Background } from './styles';
+import { Container, Content, Background, AnimatedContent } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
@@ -61,27 +61,29 @@ const SignIn: React.FC = () => {
   return (
     <Container>
       <Content>
-        <img src={logoImg} alt="logo" />
+        <AnimatedContent>
+          <img src={logoImg} alt="logo" />
 
-        <Form ref={formRef} onSubmit={onSubmit}>
-          <h1>Welcome</h1>
+          <Form ref={formRef} onSubmit={onSubmit}>
+            <h1>Welcome</h1>
 
-          <Input icon={FiMail} name="email" placeholder="E-mail" />
-          <Input
-            icon={FiLock}
-            name="password"
-            type="password"
-            placeholder="Password"
-          />
-          <Button type="submit">Enter</Button>
+            <Input icon={FiMail} name="email" placeholder="E-mail" />
+            <Input
+              icon={FiLock}
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+            <Button type="submit">Enter</Button>
 
-          <a href="forgot">Forgot my password</a>
-        </Form>
+            <a href="forgot">Forgot my password</a>
+          </Form>
 
-        <Link to="/signup">
-          <FiLogIn />
-          Create account
-        </Link>
+          <Link to="/signup">
+            <FiLogIn />
+            Create account
+          </Link>
+        </AnimatedContent>
       </Content>
       <Background />
     </Container>

@@ -9,14 +9,10 @@ import AppProvider from './hooks';
 
 import Routes from './routes/index';
 
-import ToastContainer from './components/ToastContainer';
-
 const App: React.FC = () => (
   <BrowserRouter>
     <AppProvider>
-      <Routes>
-        <SignIn />
-      </Routes>
+      <Routes />
     </AppProvider>
 
     <GlobalStyle />
