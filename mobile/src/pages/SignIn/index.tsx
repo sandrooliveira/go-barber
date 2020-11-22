@@ -12,6 +12,8 @@ import getErrorInfo from '../../utils/getErrorInfo';
 
 import logoImg from '../../assets/logo.png';
 
+import { useAuth } from '../../hooks/auth';
+
 import { Container, Title, ForgotPassword, ForgotPasswordText, CreateAccountButton, CreateAccountButtonText } from './styles';
 
 interface SignInFormData {
@@ -23,6 +25,8 @@ const SignIn: React.FC = () => {
   const passwordRef = useRef<TextInput>(null);
   const formRef = useRef<FormHandles>(null);
   const navigation = useNavigation();
+
+  const { signIn } = useAuth();
 
   const handleSignIn = useCallback(
     async (data: SignInFormData) => {
@@ -37,7 +41,11 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
 
-        //await signIn({ email: data.email, password: data.password });
+        await signIn({
+          email: data.email,
+          password: data.password
+        });
+
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getErrorInfo(err);
@@ -51,7 +59,7 @@ const SignIn: React.FC = () => {
         );
       }
     },
-    [],
+    [signIn],
   );
 
   return (

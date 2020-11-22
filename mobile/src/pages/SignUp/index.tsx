@@ -56,10 +56,10 @@ const SignUp: React.FC = () => {
           return;
         }
 
-        Alert.alert('Register erro','There was an issue on registering, please try again');
+        Alert.alert('Register erro', 'There was an issue on registering, please try again');
       }
     },
-    [],
+    [navigation],
   );
 
   return (
