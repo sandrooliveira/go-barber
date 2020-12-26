@@ -1,4 +1,4 @@
-import { getMongoRepository, Repository as MongoRepository } from 'typeorm';
+import { getMongoRepository, MongoRepository } from 'typeorm';
 
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 
