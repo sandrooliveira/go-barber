@@ -29,6 +29,8 @@
     "prettier"
   ],
   "rules": {
+    "camelcase": "off",
+    "@typescript-eslint/camelcase": "off",
     "no-use-before-define": "off",
     "no-unused-expressions": "off",
     "@typescript-eslint/ban-types": "off",
