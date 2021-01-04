@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
-import Api from '../services/api';
+import api from '../services/api';
 
 interface User {
   id: string;
@@ -31,6 +31,7 @@ export const AuthenticationProvider: React.FC = ({ children }) => {
     const user = localStorage.getItem('@GoBarber:user');
 
     if (!!token && !!user) {
+      api.defaults.headers.authorization = `Bearer ${token}`;
       return { token, user: JSON.parse(user) };
     }
 
@@ -38,7 +39,7 @@ export const AuthenticationProvider: React.FC = ({ children }) => {
   });
 
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
-    const response = await Api.post('sessions', {
+    const response = await api.post('sessions', {
       email,
       password,
     });
@@ -47,6 +48,9 @@ export const AuthenticationProvider: React.FC = ({ children }) => {
 
     localStorage.setItem('@GoBarber:token', token);
     localStorage.setItem('@GoBarber:user', JSON.stringify(user));
+
+    api.defaults.headers.authorization = `Bearer ${token}`;
+
     setData({ user, token });
   }, []);
 
