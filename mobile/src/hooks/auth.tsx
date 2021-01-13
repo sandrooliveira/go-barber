@@ -5,7 +5,14 @@ import Api from '../services/api';
 
 interface AuthState {
   token: string;
-  user: object;
+  user: User;
+}
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar_url: string;
 }
 
 interface SignInCredentials {
@@ -14,7 +21,7 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-  user: object;
+  user: User;
   loading: boolean;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
@@ -37,6 +44,7 @@ export const AuthenticationProvider: React.FC = ({ children }) => {
       const [ , user ] = userInfo;
 
       if (!!token && !!user) {
+        Api.defaults.headers.authorization = `Bearer ${token}`;
         setData({ token, user: JSON.parse(user)});
       }
 
@@ -59,6 +67,7 @@ export const AuthenticationProvider: React.FC = ({ children }) => {
       [ '@GoBarber:user', JSON.stringify(user) ]
     ]);
 
+    Api.defaults.headers.authorization = `Bearer ${token}`;
     setData({ user, token });
   }, []);
 
